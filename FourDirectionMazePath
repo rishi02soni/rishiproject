@@ -1,0 +1,32 @@
+// JAVA code for finding all possible path of a maze.. if all the four directions are allowed..
+
+package backtarcing;
+public class FourDirectionMazePath {
+    public static void main(String[] args) {
+        int row = 3;
+        int cols = 3;
+        boolean[][] isVisited = new boolean[row][cols]; // be default -> false {sare boxes mein}
+        print(0, 0, row-1, cols-1,"",isVisited);
+    }
+    private static void print(int sr, int sc, int er, int ec,String s ,boolean[][] isVisited) {
+        if(sr<0 || sc<0) return;
+        if(sr>er || sc>ec) return;
+        if(isVisited[sr][sc]==true) return; //-> if pehle aa chuke hai then return , wapis
+        if(sr==er && sc==ec){
+            System.out.println(s);
+            return;
+        }
+        isVisited[sr][sc]=true;
+        //DownWay
+        print(sr+1,sc,er,ec,s+"D",isVisited);
+        //RightWay
+        print(sr,sc+1,er,ec,s+"R",isVisited);
+        //LeftWay
+        print(sr,sc-1,er,ec,s+"L",isVisited);
+        //UpWay
+        print(sr-1,sc,er,ec,s+"U",isVisited);
+        //<<Backtracking>>
+        isVisited[sr][sc]=false;
+
+    }
+}
